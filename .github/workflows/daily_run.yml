@@ -1,0 +1,23 @@
+name: Daily Run
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run the task (dev or staging)'
+        required: true
+        default: 'dev'
+        type: string
+
+jobs:
+  daily-task:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run a script
+        run: echo "Running daily task at 2 AM in ${{ inputs.environment }} environment"
