@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Run a script
+        run: echo "Running daily task at 2 AM in ${{ inputs.environment }} environment"
+
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -28,8 +31,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
+      - name: Run tests and generate HTML report
+        run: npx playwright test --reporter=html
 
-      - name: Run a script
-        run: echo "Running daily task at 2 AM in ${{ inputs.environment }} environment"
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-test-report
+          path: playwright-report
