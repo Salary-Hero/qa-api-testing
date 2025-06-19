@@ -32,7 +32,9 @@ jobs:
         run: npm install
 
       - name: Run tests and generate HTML report
-        run: npx playwright test --reporter=html
+        env:
+          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
+        run: npx playwright test --project=dev --reporter=html
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
