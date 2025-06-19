@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test",
+    "test:dev": "npx playwright test --project=dev",
+    "test:staging": "npx playwright test --project=staging",
+    "test:report": "playwright show-report",
     "build": "tsc"
   },
   "keywords": [],
@@ -16,5 +18,8 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "zod": "^3.25.67"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0"
   }
 }
